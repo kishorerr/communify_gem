@@ -4,7 +4,7 @@ module Communify
 	end
 
 	class MyRailtie < Rails::Railtie
-		communify_generator_path = Communify::root.+'/communify/generators/active_record/communify_generator.rb'
+		communify_generator_path = Communify::root.+'/communify/generators/sms/sms_migration_generator.rb'
 
 		config.app_generators do
 			require communify_generator_path
