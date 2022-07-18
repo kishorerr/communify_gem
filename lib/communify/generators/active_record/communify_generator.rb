@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails/generators/active_record'
-require 'generators/devise/orm_helpers'
+require 'generators/communify/orm_helpers'
 
 module ActiveRecord
   module Generators
