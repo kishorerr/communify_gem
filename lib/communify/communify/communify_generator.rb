@@ -16,7 +16,7 @@ class CommunifyGenerator < Rails::Generators::NamedBase
 
     FileUtils.mkdir_p(communify_dir_path)
 
-    template "service.erb", generator_path
+    template "communify.erb", generator_path
   end
   
   private
