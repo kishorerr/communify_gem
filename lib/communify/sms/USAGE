@@ -10,5 +10,5 @@ Example:
     `rails generate service MailerService send receive --module MailerModule`
 
     This will create:
-        app/services/mailer_module/mailer_service.rb
+        db/migrate/VERSION_sms_migration.rb
 
