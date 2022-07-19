@@ -3,7 +3,8 @@
 class SmsMigration<%= table_name.camelize %> < ActiveRecord::Migration<%= migration_version %>
   def change
     create_table :<%= table_name %><%= primary_key_type %> do |t|
-      <%= migration_data -%>
+      t.string :message,              null: false, default: ""
+      t.string :recipient_number, null: false, default: ""
       t.timestamps null: false
     end
   end
