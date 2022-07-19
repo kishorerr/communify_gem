@@ -5,10 +5,9 @@ class SmsMigrationGenerator < ActiveRecord::Generators::Base
   source_root File.expand_path('../templates', __FILE__)
 
   argument :methods, type: :array, default: [], banner: "method method"
-  class_option :module, type: :string
+  class_option :primary_key_type, type: :string, desc: "The type for primary key"
 
   def create_sms_migration
-    @module_name = options[:module]
 
     communify_dir_path = Rails.root.join 'db', 'migrate'    
     generator_path = communify_dir_path.join "#{file_name}.rb"
@@ -24,6 +23,32 @@ class SmsMigrationGenerator < ActiveRecord::Generators::Base
   
   def methods?
     methods.any?
+  end
+
+  def migration_data
+    <<RUBY
+          t.string :message,              null: false, default: ""
+          t.string :recipient_number, null: false, default: ""
+    RUBY
+  end
+
+  def rails5_and_up?
+    Rails::VERSION::MAJOR >= 5
+  end
+
+  def migration_version
+    if rails5_and_up?
+      "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
+    end
+  end
+
+  def primary_key_type
+    primary_key_string if rails5_and_up?
+  end
+
+  def primary_key_string
+    key_string = options[:primary_key_type]
+    ", id: :#{key_string}" if key_string
   end
 
 end
