@@ -1,0 +1,9 @@
+Description:
+    Creates a migration file for sms purpose
+
+Example:
+    `rails generate sms_migration`
+
+    This will create:
+        db/migrate/VERSION_sms_migration.rb
+
