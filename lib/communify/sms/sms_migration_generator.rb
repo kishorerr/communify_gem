@@ -17,6 +17,10 @@ class SmsMigrationGenerator < Rails::Generators::NamedBase
   end
   
   private
+
+  def module?
+    @module_name.present?
+  end
   
   def methods?
     methods.any?
