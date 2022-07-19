@@ -13,8 +13,6 @@ class SmsMigrationGenerator < Rails::Generators::NamedBase
     communify_dir_path = Rails.root.join 'db', 'migrate'    
     generator_path = communify_dir_path.join "#{file_name}.rb"
 
-    FileUtils.mkdir_p(service_dir_path)
-
     template "sms.erb", generator_path
   end
   
