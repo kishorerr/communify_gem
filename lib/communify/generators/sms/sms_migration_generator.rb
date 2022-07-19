@@ -1,3 +1,6 @@
+require 'rails/generators'
+require 'fileutils'
+
 module Communify
     module Generators
         module Sms
