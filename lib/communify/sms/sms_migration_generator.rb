@@ -1,3 +1,4 @@
+require 'rails/generators'
 require 'rails/generators/active_record'
 require 'fileutils'
 
@@ -16,14 +17,6 @@ class SmsMigrationGenerator < ActiveRecord::Generators::Base
   end
   
   private
-
-  def module?
-    @module_name.present?
-  end
-  
-  def methods?
-    methods.any?
-  end
 
   def rails5_and_up?
     Rails::VERSION::MAJOR >= 5
