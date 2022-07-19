@@ -1,7 +1,7 @@
-require 'rails/generators'
+require 'activerecord/generators'
 require 'fileutils'
 
-class SmsMigrationGenerator < ActiveRecord::Generators::Migration
+class SmsMigrationGenerator < ActiveRecord::Generators::Base
   source_root File.expand_path('../templates', __FILE__)
 
   argument :methods, type: :array, default: [], banner: "method method"
