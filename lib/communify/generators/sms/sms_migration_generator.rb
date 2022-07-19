@@ -1,30 +1,27 @@
 require 'rails/generators'
 require 'fileutils'
 
-module Communify
-    module Generators
-        module Sms
-            class SmsMigrationGenerator < Rails::Generators::NamedBase
-                def create_data_migration_file
-                  timestamp = Time.zone.now.to_s.tr('^0-9', '')[0..13]
-                  filepath = "db/migrate/#{timestamp}_#{file_name}.rb"
-              
-                  create_file filepath, <<-FILE
-                  # frozen_string_literal: true
-              
-                  class #{class_name} < ActiveRecord::Migration[7.0]
-                    def change
-                        create_table :todos do |t|
-                            t.string :title
-                            t.string :created_by
-                      
-                            t.timestamps
-                          end
-                    end
-                  end
-                  FILE
-                end
-              end
-        end
-    end
+class SmsMigrationGenerator < Rails::Generators::NamedBase
+  source_root File.expand_path('../templates', __FILE__)
+
+  argument :methods, type: :array, default: [], banner: "method method"
+  class_option :module, type: :string
+
+  def create_service_file
+    @module_name = options[:module]
+
+    communify_dir_path = Rails.root.join 'db', 'migrate'    
+    generator_path = communify_dir_path.join "#{file_name}.rb"
+
+    FileUtils.mkdir_p(service_dir_path)
+
+    template "sms.erb", generator_path
+  end
+  
+  private
+  
+  def methods?
+    methods.any?
+  end
+
 end
