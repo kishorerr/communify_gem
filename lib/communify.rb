@@ -1,5 +1,5 @@
 require "communify/version"
-require 'communify/railtie' if defined?(Rails)
+require 'communify/sms/sms_railtie' if defined?(Rails)
 
 class Error < StandardError; end
 
