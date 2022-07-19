@@ -1,4 +1,4 @@
-require 'rails/generators/activerecord'
+require 'rails/generators/active_record'
 require 'fileutils'
 
 class SmsMigrationGenerator < ActiveRecord::Generators::Base
