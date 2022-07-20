@@ -1,5 +1,8 @@
+require 'communify'
 Communify.config do |c|
+
   # These are mandatory options that you must set for sms communication:
-  # c.account_sid = ENV['LOKALISE_API_TOKEN']
-  # c.auth_toke = ENV['LOKALISE_PROJECT_ID']
+  # c.account_sid = 'Your Twilio Account SID goes here'
+  # c.auth_token = 'Your Twilio Auth Token goes here'
+  # c.sender_no = 'Your Sender Number goes here'
 end

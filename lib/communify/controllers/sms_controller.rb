@@ -10,7 +10,7 @@ module Communify
                 auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
                 @client.messages.create(
-                    from: '+19202395109',
+                    from: Communify.sender_no,
                     to: '+917356610002',
                     body: message
                 )
