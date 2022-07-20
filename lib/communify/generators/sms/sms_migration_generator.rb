@@ -1,6 +1,6 @@
 require 'rails/generators'
 require 'rails/generators/active_record'
-require 'fileutils'
+
 module Communify
   module Generators
     class SmsMigrationGenerator < ActiveRecord::Generators::Base
