@@ -1,5 +1,6 @@
 require "communify/version"
 require 'communify/railtie' if defined?(Rails)
+require 'communify/controllers'
 
 class Error < StandardError; end
 
