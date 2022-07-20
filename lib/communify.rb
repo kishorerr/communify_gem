@@ -1,4 +1,5 @@
 require "communify/version"
+require 'communify/generators/install_generator'
 require 'communify/railtie' if defined?(Rails)
 require 'communify/controllers/sms_controller'
 
