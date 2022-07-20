@@ -3,18 +3,22 @@ require 'rails/generators/active_record'
 
 module Communify
   module Generators
-    class SmsMigrationGenerator < ActiveRecord::Generators::Base
+    class SmsGenerator < ActiveRecord::Generators::Base
       source_root File.expand_path('../templates', __FILE__)
     
-      argument :methods, type: :array, default: [], banner: "method method"
-      class_option :primary_key_type, type: :string, desc: "The type for primary key"
+      # argument :methods, type: :array, default: [], banner: "method method"
+      # class_option :primary_key_type, type: :string, desc: "The type for primary key"
     
       def create_sms_migration
     
         communify_dir_path = Rails.root.join 'db', 'migrate'    
         generator_path = communify_dir_path.join "#{file_name}.rb"
     
-        migration_template "sms.erb", "#{communify_dir_path}/create_#{table_name}.rb", migration_version: migration_version
+        migration_template "sms_migration.erb", "#{communify_dir_path}/create_#{table_name}.rb", migration_version: migration_version
+      end
+
+      def create_sms_model
+        template "sms_model.erb", "app/models/#{file_name}.rb"
       end
       
       private
