@@ -9,7 +9,7 @@ module Communify
                 @client = Twilio::REST::Client.new account_sid, auth_token
                 @client.messages.create(
                     from: Communify.sender_no,
-                    to: resource.recipient_no,
+                    to: resource.recipient_number,
                     body: resource.message
                 )
             end
