@@ -1,15 +1,17 @@
 require "communify/version"
-require 'communify/generators/install/install_generator'
 require 'communify/railtie' if defined?(Rails)
+require 'communify/generators/install/install_generator'
 require 'communify/controllers/sms_controller'
+module Communify
+  class Error < StandardError; end
 
-class Error < StandardError; end
+  class << self
+    attr_accessor :account_sid, :auth_token
 
-  class Welcome 
-
-    def self.message (variable = "Welcome")
-      puts variable
+    def config
+      yield self
     end
-
   end
+end
+
 

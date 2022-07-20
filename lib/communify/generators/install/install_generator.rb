@@ -9,7 +9,7 @@ module Communify
 
       desc "Creates a Communify initializer"
 
-      def create_initializer
+      def copy_config
         template "communify.erb", "config/initializers/communify.rb"
       end
     end

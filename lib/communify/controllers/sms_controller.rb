@@ -1,13 +1,13 @@
 require 'twilio-ruby'
+require 'communify'
 module Communify
     module Controllers
         class Sms 
-            # attr_accessor :account_sid
-            # attr_accessor :auth_token
+            # attr_accessor :account_sid, :auth_token
 
             def self.send_message (message = "Hello")
-                account_sid = "AC761fde7cea01ddcd24f979f27292ddec"
-                auth_token = "0980820fdd28fef73801a2286dbf1147"
+                account_sid = Communify.account_sid
+                auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
                 @client.messages.create(
                     from: '+19202395109',
