@@ -6,11 +6,12 @@ module Communify
         class PriorityWorker
             include Sidekiq::Worker
         
-            def perform(resource, time)
+            def perform(resource, sec)
+                puts "HIIIIIIi"
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
-                sleep(time)
+                sleep(sec)
                     @client.messages.create(
                         from: Communify.sender_no,
                         to: resource.recipient_number,
