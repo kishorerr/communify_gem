@@ -6,8 +6,7 @@ module Communify
                 if resource.save
                     time = resource.read_attribute_before_type_cast(:priority)
                     Communify::Workers::PriorityWorker.perform_in(time.minutes.from_now,resource.recipient_number, resource.message)
-                else
-                
+                else     
                 end
             end
         end

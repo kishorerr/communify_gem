@@ -5,9 +5,8 @@ module Communify
     module Workers 
         class PriorityWorker
             include Sidekiq::Worker
-        
+            sidekiq_options retry: Communify.retry_count
             def perform(recipient_number, message)
-                puts "HIIIIIIi"
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
