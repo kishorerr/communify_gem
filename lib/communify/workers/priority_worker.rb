@@ -8,11 +8,13 @@ module Communify
         
             def perform(recipient_number, message, time)
                 puts "HIIIIIIi"
+                puts time
+
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
-                sleep(time.minutes)
                 begin
+                    sleep(time.minutes)
                     @client.messages.create(
                         from: Communify.sender_no,
                         to: recipient_number,
