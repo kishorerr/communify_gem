@@ -4,6 +4,7 @@ module Communify
     module Controllers
         class Sms 
             def self.send_message (resource)
+                resource.save
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
                 Thread.new do
@@ -15,6 +16,7 @@ module Communify
                         body: resource.message
                     )
                     resource.save
+                    
                 end
             end
         end
