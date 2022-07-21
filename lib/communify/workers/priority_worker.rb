@@ -1,3 +1,5 @@
+require 'twilio-ruby'
+require 'sidekiq'
 module Communify
     module Workers 
         class PriorityWorker

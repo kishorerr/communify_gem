@@ -1,4 +1,3 @@
-require 'twilio-ruby'
 require 'lib/communify'
 require 'app/worker/priority_worker'
 module Communify
