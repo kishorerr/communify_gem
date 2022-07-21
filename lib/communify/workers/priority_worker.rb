@@ -19,9 +19,9 @@ module Communify
                         to: recipient_number,
                         body: message
                     )
-                    new_result = "true"
+                    return new_result = "true"
                 rescue Twilio::REST::RequestError => e
-                    new_result = "false"
+                    return new_result = "false"
                 end
             end
         end
