@@ -3,6 +3,7 @@ module Communify
     module Controllers
         class Sms 
             def self.send_message (resource)
+                
                 resource.save
                 
                 puts resource.read_attribute_before_type_cast(:priority)

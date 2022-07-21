@@ -14,8 +14,8 @@ module Communify
                 sleep(sec)
                     @client.messages.create(
                         from: Communify.sender_no,
-                        to: resource.recipient_number,
-                        body: resource.message
+                        to: resource.attributes[recipient_number],
+                        body: resource.attributes[message]
                     )
                     resource.update_column(:sent_at, DateTime.now)
             end
