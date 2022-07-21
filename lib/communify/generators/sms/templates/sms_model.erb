@@ -1,3 +1,5 @@
 class <%= file_name.camelize %> < ActiveRecord::Base
-    enum priority_type: %i[urgent high medium low]
+
+    enum priority: %i[urgent high medium low]
+
 end
