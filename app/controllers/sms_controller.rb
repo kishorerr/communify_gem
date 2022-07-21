@@ -1,5 +1,5 @@
 require 'twilio-ruby'
-require 'communify'
+require 'lib/communify'
 module Communify
     module Controllers
         class Sms 
@@ -8,7 +8,7 @@ module Communify
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
                 Thread.new do
-                    sleep(resource.priority.seconds)
+                    sleep(resource.priority.minutes)
                     @client = Twilio::REST::Client.new account_sid, auth_token
                     @client.messages.create(
                         from: Communify.sender_no,

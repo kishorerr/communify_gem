@@ -41,4 +41,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "twilio-ruby", "~> 5.69.0"
+  spec.add_development_dependency "redis", "~>4.7.0"
+  spec.add_development_dependency "sidekiq", "~>6.0.0"
 end
