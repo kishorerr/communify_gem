@@ -8,7 +8,7 @@ module Communify
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
 
-                PriorityWorker.perform_async(resource, resource.read_attribute_before_type_cast(:priority))
+                Communify::Workers::PriorityWorker.perform_async(resource, resource.read_attribute_before_type_cast(:priority))
             end
         end
     end
