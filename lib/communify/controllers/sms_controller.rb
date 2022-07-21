@@ -4,8 +4,8 @@ module Communify
         class Sms 
             def self.send_message (resource)
                 if resource.save
-                    puts resource.read_attribute_before_type_cast(:priority)
-                    Communify::Workers::PriorityWorker.perform_async(resource.recipient_number, resource.message, resource.read_attribute_before_type_cast(:priority))
+                    time = resource.read_attribute_before_type_cast(:priority)
+                    Communify::Workers::PriorityWorker.perform_in(time.minutes.from_now,resource.recipient_number, resource.message)
                 else
                 
                 end
