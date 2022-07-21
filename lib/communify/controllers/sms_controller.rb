@@ -1,5 +1,5 @@
-require 'lib/communify'
-require 'app/worker/priority_worker'
+require 'communify'
+require 'communify/workers/priority_worker'
 module Communify
     module Controllers
         class Sms 
