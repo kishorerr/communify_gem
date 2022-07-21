@@ -5,6 +5,7 @@ class Create<%= table_name.camelize %> < ActiveRecord::Migration<%= migration_ve
     create_table :<%= table_name %> do |t|
       t.string :message,null: false, default: ""
       t.string :recipient_number, null: false, default: ""
+      #t.datetime :sent_at
 
       t.timestamps null: false
     end
