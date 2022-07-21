@@ -6,7 +6,7 @@ module Communify
         class PriorityWorker
             include Sidekiq::Worker
         
-            def perform(resource, sec)
+            def perform(recipient_number, message, sec)
                 puts "HIIIIIIi"
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
@@ -14,8 +14,8 @@ module Communify
                 sleep(sec)
                     @client.messages.create(
                         from: Communify.sender_no,
-                        to: resource.attributes[recipient_number],
-                        body: resource.attributes[message]
+                        to: recipient_number,
+                        body: message
                     )
                     resource.update_column(:sent_at, DateTime.now)
             end
