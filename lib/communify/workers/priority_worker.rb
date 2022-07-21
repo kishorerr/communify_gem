@@ -5,7 +5,7 @@ module Communify
     module Workers 
         class PriorityWorker
             include Sidekiq::Worker
-            sidekiq_options retry: Communify.retry_count
+            sidekiq_options retry: 3
 
             def perform(recipient_number, message)
                 account_sid = Communify.account_sid

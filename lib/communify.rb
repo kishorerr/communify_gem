@@ -8,7 +8,7 @@ module Communify
   class Error < StandardError; end
 
   class << self
-    attr_accessor :account_sid, :auth_token, :sender_no, :retry_count
+    attr_accessor :account_sid, :auth_token, :sender_no
 
     def config
       yield self
