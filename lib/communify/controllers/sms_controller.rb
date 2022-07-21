@@ -5,10 +5,7 @@ module Communify
             def self.send_message (resource)
                 resource.save
                 puts resource.read_attribute_before_type_cast(:priority)
-                result = "false"
-                if result.eql?("false")
-                    puts result
-                    result = Communify::Workers::PriorityWorker.perform_async(resource.recipient_number, resource.message, resource.read_attribute_before_type_cast(:priority))
+                    Communify::Workers::PriorityWorker.perform_async(resource.recipient_number, resource.message, resource.read_attribute_before_type_cast(:priority))
                 end
                 
             end
