@@ -1,5 +1,5 @@
 class <%= file_name.camelize %> < ActiveRecord::Base
-    #default values have been set for priority in seconds
-    enum :priority, {urgent: 0, high: 300, low: 1800 , medium: 3600}
+    #default values have been set for priority in minutes
+    enum :priority, {urgent: 0, high: 5, medium: 30 , low: 60}
 
 end
