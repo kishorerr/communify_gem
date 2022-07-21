@@ -8,7 +8,7 @@ module Communify
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
                 Thread.new do
-                    sleep(resource.priority.minutes)
+                    sleep(resource.priority.seconds)
                     @client = Twilio::REST::Client.new account_sid, auth_token
                     @client.messages.create(
                         from: Communify.sender_no,
