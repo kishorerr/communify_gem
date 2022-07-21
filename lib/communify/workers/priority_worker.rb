@@ -1,13 +1,16 @@
 require 'twilio-ruby'
 require 'sidekiq'
+require 'communify'
 module Communify
     module Workers 
         class PriorityWorker
             include Sidekiq::Worker
         
             def perform(resource, time)
-                sleep(time)
+                account_sid = Communify.account_sid
+                auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
+                sleep(time)
                     @client.messages.create(
                         from: Communify.sender_no,
                         to: resource.recipient_number,
