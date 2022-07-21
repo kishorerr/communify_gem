@@ -6,7 +6,7 @@ module Communify
         class PriorityWorker
             include Sidekiq::Worker
         
-            def perform(*recipient_number, *message, *time)
+            def perform(recipient_number, message, time)
                 puts "HIIIIIIi"
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
