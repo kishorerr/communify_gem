@@ -1,5 +1,6 @@
 require 'twilio-ruby'
 require 'lib/communify'
+require 'app/worker/priority_worker'
 module Communify
     module Controllers
         class Sms 
@@ -7,16 +8,8 @@ module Communify
                 resource.save
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
-                Thread.new do
-                    sleep(resource.priority.minutes)
-                    @client = Twilio::REST::Client.new account_sid, auth_token
-                    @client.messages.create(
-                        from: Communify.sender_no,
-                        to: resource.recipient_number,
-                        body: resource.message
-                    )
-                    resource.update_column(:sent_at, DateTime.now)
-                end
+
+                PriorityWorker.perform_async(resource, resource.read_attribute_before_type_cast(:priority))
             end
         end
     end
