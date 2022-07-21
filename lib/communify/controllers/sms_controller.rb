@@ -15,7 +15,7 @@ module Communify
                         to: resource.recipient_number,
                         body: resource.message
                     )
-                    resource.save
+                    resource.update_column(:sent_at, DateTime.now)
                 end
             end
         end
