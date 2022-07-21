@@ -5,7 +5,8 @@ module Communify
     module Workers 
         class PriorityWorker
             include Sidekiq::Worker
-            sidekiq_options retry: 3
+            sidekiq_options retry: Communify.retry_count
+
             def perform(recipient_number, message)
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
@@ -17,7 +18,7 @@ module Communify
                         body: message
                     )
                 rescue Twilio::REST::RestError => e
-
+                    raise e
                 end
             end
         end
