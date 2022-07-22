@@ -11,6 +11,7 @@ module Communify
                     if result.eql?(true)
                         resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
                     end
+                    return result
                 else    
                     raise "Error => Resource has not been saved!!"
                 end
