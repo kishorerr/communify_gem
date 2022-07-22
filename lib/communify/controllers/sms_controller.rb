@@ -3,8 +3,8 @@ module Communify
     module Controllers
         class Sms 
             def self.send_message (resource)
-                resource.update_column(:message_status, "Message Queued at #{DateTime.now}")
                 if resource.save
+                    resource.update_column(:message_status, "Message Queued at #{DateTime.now}")
                     time = resource.read_attribute_before_type_cast(:priority)
                     result = false
                     result = Communify::Workers::PriorityWorker.perform_in(time.minutes.from_now,resource.recipient_number, resource.message)
