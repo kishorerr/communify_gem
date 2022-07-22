@@ -17,7 +17,6 @@ module Communify
                         to: recipient_number,
                         body: message
                     )
-                    return true
                 rescue Twilio::REST::RestError => e
                     raise e
                 end
