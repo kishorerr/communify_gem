@@ -4,10 +4,11 @@ module Communify
     module Controllers
         class Sms 
             attr_accessor :resource
-            def def initialize(resource)
+            def initialize (resource)
               @resource = resource
             end
-            def self.send_message(resource)
+
+            def self.send_message (resource)
                 Sms.new(resource)
                 if resource.save
                     resource.update_column(:message_status, "Message Queued at #{DateTime.now}")
