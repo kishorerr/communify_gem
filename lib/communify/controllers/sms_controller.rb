@@ -8,6 +8,10 @@ module Communify
               @resource = resource
             end
 
+            def self.resource
+                @resource
+            end
+
             def self.send_message (resource)
                 Sms.new(resource)
                 if resource.save
