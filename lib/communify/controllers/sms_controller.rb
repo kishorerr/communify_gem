@@ -6,10 +6,10 @@ module Communify
             def self.current_res (resource)         
                 @current_obj = resource
             end
-            def send_res
+            def self.send_res
                 @current_obj
             end
-            def send_message(resource)
+            def self.send_message(resource)
                 Sms.current_res(resource)
                 if resource.save
                     resource.update_column(:message_status, "Message Queued at #{DateTime.now}")
