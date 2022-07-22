@@ -9,7 +9,8 @@ module Communify
             end
 
             def self.resource
-                @resource
+                resource
+                puts resource
             end
 
             def self.send_message (resource)
