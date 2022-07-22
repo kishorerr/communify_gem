@@ -1,8 +1,8 @@
 require 'communify/workers/priority_worker'
+require 'sidekiq/api'
 module Communify
     module Controllers
         class Sms 
-            include Sidekiq::Worker
             def self.send_message (resource)
                 if resource.save
                     resource.update_column(:message_status, "Message Queued at #{DateTime.now}")
