@@ -12,11 +12,11 @@ module Communify
                 auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
                 begin
-                    @client.messages.create(
-                        from: Communify.sender_no,
-                        to: recipient_number,
-                        body: message
-                    )
+                    return @client.messages.create(
+                            from: Communify.sender_no,
+                            to: recipient_number,
+                            body: message
+                            ) 
                 rescue Twilio::REST::RestError => e
                     raise e
                 end
