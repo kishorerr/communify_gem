@@ -1,6 +1,7 @@
 require 'twilio-ruby'
 require 'sidekiq'
 require 'communify'
+require 'communify/controllers/sms_controller'
 module Communify
     module Workers 
         class PriorityWorker
@@ -17,6 +18,7 @@ module Communify
                             to: recipient_number,
                             body: message
                             ) 
+                            Communify::Controllers::Sms.resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
                 rescue Twilio::REST::RestError => e
                     raise e
                 end

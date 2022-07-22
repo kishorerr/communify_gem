@@ -3,6 +3,7 @@ require 'sidekiq/api'
 module Communify
     module Controllers
         class Sms 
+            attr_accessor :resource
             def self.send_message (resource)
                 if resource.save
                     resource.update_column(:message_status, "Message Queued at #{DateTime.now}")
