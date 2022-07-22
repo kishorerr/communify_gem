@@ -2,6 +2,7 @@ require 'communify/workers/priority_worker'
 module Communify
     module Controllers
         class Sms 
+            include Sidekiq::Worker
             def self.send_message (resource)
                 if resource.save
                     resource.update_column(:message_status, "Message Queued at #{DateTime.now}")
@@ -10,7 +11,8 @@ module Communify
                     if result != 'null'
                         resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
                     end
-                    return result
+                    job = Sidekiq::RetrySet.new.find_job(result)
+                    return job
                 else    
                     raise "Error => Resource has not been saved!!"
                 end
