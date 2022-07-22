@@ -21,6 +21,7 @@ module Communify
                     raise e
                 end
             end
+            return true
         end
     end
 end
