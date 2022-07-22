@@ -18,7 +18,7 @@ module Communify
                             to: recipient_number,
                             body: message
                             ) 
-                            Communify::Controllers::Sms.res.update_column(:message_status, "Message Delivered at #{DateTime.now}")
+                            Communify::Controllers::Sms.send_res.update_column(:message_status, "Message Delivered at #{DateTime.now}")
                 rescue Twilio::REST::RestError => e
                     raise e
                 end
