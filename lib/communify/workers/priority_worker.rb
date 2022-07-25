@@ -6,7 +6,7 @@ module Communify
     module Workers 
         class PriorityWorker
             include Sidekiq::Worker
-            sidekiq_options retry: 2
+            sidekiq_options retry: 1
 
             sidekiq_retries_exhausted do |job, e|
                 resource_id = job['args'].first
