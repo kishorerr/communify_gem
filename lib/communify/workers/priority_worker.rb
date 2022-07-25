@@ -6,14 +6,7 @@ module Communify
     module Workers 
         class PriorityWorker
             include Sidekiq::Worker
-            sidekiq_options retry: 1
-
-            sidekiq_retries_exhausted do |job, e|
-                resource_id = job['args'].first
-                puts "eloo #{resource_id}"
-                @failed_resource = CommunifySms.find(resource_id)
-                
-            end
+            sidekiq_options retry: 1, dead: false
 
             def perform(resource_id, recipient_number, message, time, attempt)
                 account_sid = Communify.account_sid
@@ -24,7 +17,10 @@ module Communify
                 begin
                     @client.messages.create(from: Communify.sender_no,to: recipient_number,body: message) 
                 rescue Twilio::REST::RestError => e
-                   @current_resource.update_column(:message_status, "Message Failed at #{DateTime.now} due to error => #{e}")
+                    raise e
+                    @current_resource.update_column(:attempt, attempt)
+                    attempt = attempt +1
+                    @current_resource.update_column(:message_status, "Message Failed at #{DateTime.now} due to error => #{e}")
                 end
                 @current_resource.update_column(:attempt_count, attempt)
                 @current_resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
