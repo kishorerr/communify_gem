@@ -19,8 +19,8 @@ module Communify
                             to: recipient_number,
                             body: message
                             ) 
-                    @current_resource.update_column(:attempt_count, attempt+1)
-                    @current_resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
+                    current_resource.update_column(:attempt_count, attempt+1)
+                    current_resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
                 rescue Twilio::REST::RestError => e
                     if attempt < 3
                         attempt = attempt + 1
