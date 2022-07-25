@@ -8,9 +8,9 @@ module Communify
       source_root File.expand_path('../templates', __FILE__)
 
     
-      # def copy_migration
-      #   migration_template "sms_migration.erb", "db/migrate/create_communify_sms.rb", migration_version: migration_version
-      # end
+      def copy_migration
+        template "sms_migration.erb", "db/migrate/#{DateTime.now.to_fs(:number)}_create_communify_sms.rb", migration_version: migration_version
+      end
 
       def copy_sms_model
         template "sms_model.erb", "app/models/communify_sms.rb"
