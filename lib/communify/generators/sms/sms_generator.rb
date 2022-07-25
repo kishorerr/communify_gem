@@ -9,7 +9,7 @@ module Communify
 
     
       def copy_migration
-        migration_template "sms_migration.erb", "db/migrate/create_communify_sms.rb", migration_version: migration_version
+        template "sms_migration.erb", "db/migrate/create_communify_sms.rb", migration_version: migration_version
       end
 
       def copy_sms_model
