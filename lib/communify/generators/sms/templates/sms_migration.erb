@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
-class Create<%= table_name.camelize %> < ActiveRecord::Migration<%= migration_version %>
+class CreateCommunifySms < ActiveRecord::Migration<%= migration_version %>
   def change
-    create_table :<%= table_name %> do |t|
+    create_table :communify_sms do |t|
       t.string :message,null: false, default: ""
       t.string :recipient_number, null: false, default: ""
-      t.datetime :sent_at
+      t.int :attempt_count, null: false,default: 1
+      t.string :message_status, null: false,default: ""
 
       t.timestamps null: false
     end
-    add_column :<%= table_name %>, :priority, :integer, default: 0
+    add_column :communify_sms, :priority, :integer, default: 0
   end
 end

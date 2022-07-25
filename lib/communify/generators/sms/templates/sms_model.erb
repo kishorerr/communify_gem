@@ -1,4 +1,4 @@
-class <%= file_name.camelize %> < ActiveRecord::Base
+class CommunifySms < ActiveRecord::Base
     #default values have been set for priority in minutes
     enum :priority, {urgent: 0, high: 5, medium: 30 , low: 60}
 
