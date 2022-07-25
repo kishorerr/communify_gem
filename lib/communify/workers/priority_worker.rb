@@ -14,7 +14,7 @@ module Communify
                 @client = Twilio::REST::Client.new account_sid, auth_token
                 @current_resource = CommunifySms.find(resource_id)
                 begin
-                    topper = @client.messages.create(from: Communify.sender_no,to: recipient_number,body: message)
+                    twilio_response = @client.messages.create(from: Communify.sender_no,to: recipient_number,body: message)
                 rescue Twilio::REST::RestError => e
                     puts "ello #{topper}"
                     @current_resource.update_column(:attempt_count, attempt)
@@ -25,7 +25,7 @@ module Communify
                         retry
                     end
                 else
-                    puts "ello #{topper}"
+                    @current_resource.update_column(:message_sid, twilio_response[/:([^ ]+[^>])/, 2])
                     @current_resource.update_column(:attempt_count, attempt)
                     @current_resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
                 end
