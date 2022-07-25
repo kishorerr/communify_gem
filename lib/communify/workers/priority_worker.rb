@@ -10,6 +10,7 @@ module Communify
 
             sidekiq_retries_exhausted do |job, e|
                 resource_id = job['args'].first
+                puts "eloo #{resource_id}"
                 @failed_resource = CommunifySms.find(resource_id)
                 @failed_resource.update_column(:message_status, "Message Failed at #{DateTime.now} due to error => #{e}")
             end
