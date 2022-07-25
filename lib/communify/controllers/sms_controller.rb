@@ -9,7 +9,7 @@ module Communify
                     time = resource.read_attribute_before_type_cast(:priority)
                     attempt = 0
                     result = Communify::Workers::PriorityWorker.perform_in(time.minutes.from_now, resource.recipient_number, resource.message, resource.id, time, attempt)
-                    return result
+                    return resource.id
                 else    
                     raise "Error => Resource has not been saved!!"
                 end
