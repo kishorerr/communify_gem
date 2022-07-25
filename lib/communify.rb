@@ -1,7 +1,7 @@
 require "communify/version"
 # require 'communify/railtie' if defined?(Rails)
 require 'communify/generators/install/install_generator'
-require 'communify/generators/sms/sms_generator'
+require 'communify/generators/sms/sms_generator1'
 require 'communify/controllers/sms_controller'
 require 'communify/workers/priority_worker'
 
