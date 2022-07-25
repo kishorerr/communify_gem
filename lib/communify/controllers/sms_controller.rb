@@ -7,7 +7,7 @@ module Communify
                 if resource.save
                     resource.update_column(:message_status, "Message Queued at #{DateTime.now}")
                     time = resource.read_attribute_before_type_cast(:priority)
-                    attempt = 0
+                    attempt = 1
                     result = Communify::Workers::PriorityWorker.perform_in(time.minutes.from_now, resource.recipient_number, resource.message, resource.id, time, attempt)
                     return resource.id
                 else    

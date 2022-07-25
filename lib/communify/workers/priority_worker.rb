@@ -13,16 +13,13 @@ module Communify
                 auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
                 @current_resource = CommunifySms.find(resource_id)
+                puts @current_resource.id
                 begin
-                    @client.messages.create(
-                            from: Communify.sender_no,
-                            to: recipient_number,
-                            body: message
-                            ) 
-                    @current_resource.update_column(:attempt_count, attempt+1)
+                    @client.messages.create(from: Communify.sender_no,to: recipient_number,body: message) 
+                    @current_resource.update_column(:attempt_count, attempt)
                     @current_resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
                 rescue Twilio::REST::RestError => e
-                    if attempt < 3
+                    if attempt < 4
                         attempt = attempt + 1
                         Communify::Workers::PriorityWorker.perform_in(time.minutes.from_now, @current_resource.recipient_number, @current_resource.message, @current_resource.id, time, attempt)
                     else
