@@ -25,7 +25,7 @@ module Communify
                         retry
                     end
                 else
-                    @current_resource.update_column(:message_sid, twilio_response)
+                    @current_resource.update_column(:message_sid, twilio_response['sid'])
                     @current_resource.update_column(:attempt_count, attempt)
                     @current_resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
                 end

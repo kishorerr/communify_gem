@@ -7,7 +7,7 @@ class CreateCommunifySms < ActiveRecord::Migration<%= migration_version %>
       t.string :recipient_number, null: false, default: ""
       t.integer :attempt_count, null: false,default: 1
       t.string :message_status, null: false,default: ""
-      t.string :message_id, null: false,default: ""
+      t.string :message_sid, null: false,default: ""
 
       t.timestamps null: false
     end
