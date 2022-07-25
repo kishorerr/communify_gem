@@ -12,7 +12,7 @@ module Communify
                 resource_id = job['args'].first
                 puts "eloo #{resource_id}"
                 @failed_resource = CommunifySms.find(resource_id)
-                @failed_resource.update_column(:message_status, "Message Failed at #{DateTime.now} due to error => #{e}")
+                
             end
 
             def perform(resource_id, recipient_number, message, time, attempt)
@@ -23,9 +23,9 @@ module Communify
                 # puts @current_resource.id
                 begin
                     @client.messages.create(from: Communify.sender_no,to: recipient_number,body: message) 
-                    
                 rescue Twilio::REST::RestError => e
                    raise e
+                   @current_resource.update_column(:message_status, "Message Failed at #{DateTime.now} due to error => #{e}")
                 end
                 @current_resource.update_column(:attempt_count, attempt)
                 @current_resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
