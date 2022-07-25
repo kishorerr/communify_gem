@@ -8,7 +8,7 @@ module Communify
             include Sidekiq::Worker
             sidekiq_options retry: 0, dead: false
 
-            def perform(recipient_number, message,resource_id,time,attempt)
+            def perform(recipient_number, message, resource_id, time, attempt)
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
