@@ -24,7 +24,6 @@ module Communify
                 begin
                     @client.messages.create(from: Communify.sender_no,to: recipient_number,body: message) 
                 rescue Twilio::REST::RestError => e
-                   raise e
                    @current_resource.update_column(:message_status, "Message Failed at #{DateTime.now} due to error => #{e}")
                 end
                 @current_resource.update_column(:attempt_count, attempt)
