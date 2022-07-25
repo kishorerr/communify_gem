@@ -3,16 +3,13 @@ require 'rails/generators/active_record'
 
 module Communify
   module Generators
+
     class SmsGenerator < ActiveRecord::Generators::Base
       source_root File.expand_path('../templates', __FILE__)
 
     
       def copy_migration
-    
-        communify_dir_path = Rails.root.join 'db', 'migrate'    
-        # generator_path = communify_dir_path.join "#{file_name}.rb"
-    
-        migration_template "sms_migration.erb", "#{communify_dir_path}/create_communify_sms.rb", migration_version: migration_version
+        migration_template "sms_migration.erb", "db/migrate/create_communify_sms.rb", migration_version: migration_version
       end
 
       def copy_sms_model
