@@ -23,7 +23,8 @@ module Communify
                     @current_resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
                 rescue Twilio::REST::RestError => e
                     if attempt < Communify.attempt_count
-                        Communify::Workers::PriorityWorker.perform_in(time.minutes.from_now, @current_resource.recipient_number, @current_resource.message, @current_resource.id, time, attempt+1)
+                        attempt = attempt + 1
+                        Communify::Workers::PriorityWorker.perform_in(time.minutes.from_now, @current_resource.recipient_number, @current_resource.message, @current_resource.id, time, attempt)
                     else
                         @current_resource.update_column(:message_status, "Message Failed at #{DateTime.now} due to error => #{e}")
                     end
