@@ -6,7 +6,8 @@ module Communify
     module Workers 
         class PriorityWorker
             include Sidekiq::Worker
-            sidekiq_options retry: 3, dead: false
+            sidekiq_options retry: 2
+
             sidekiq_retries_exhausted do |job, e|
                 resource_id = job['args'].first
                 @failed_resource = CommunifySms.find(resource_id)
@@ -14,8 +15,6 @@ module Communify
             end
 
             def perform(recipient_number, message, resource_id, time, attempt)
-                puts attempt
-                puts resource_id
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
