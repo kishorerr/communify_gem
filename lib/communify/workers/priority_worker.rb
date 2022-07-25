@@ -25,6 +25,7 @@ module Communify
                         retry
                     end
                 else
+                    puts "ello #{topper}"
                     @current_resource.update_column(:attempt_count, attempt)
                     @current_resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
                 end
