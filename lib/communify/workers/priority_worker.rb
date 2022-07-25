@@ -9,11 +9,13 @@ module Communify
             sidekiq_options retry: 0, dead: false
 
             def perform(recipient_number, message, resource_id, time, attempt)
+                puts attempt
+                puts resource_id
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
                 @current_resource = CommunifySms.find(resource_id)
-                puts @current_resource.id
+                # puts @current_resource.id
                 begin
                     @client.messages.create(from: Communify.sender_no,to: recipient_number,body: message) 
                     @current_resource.update_column(:attempt_count, attempt)
