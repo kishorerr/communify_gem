@@ -7,7 +7,7 @@ module Communify
       source_root File.expand_path('../templates', __FILE__)
 
     
-      def create_sms_migration
+      def copy_migration
     
         communify_dir_path = Rails.root.join 'db', 'migrate'    
         # generator_path = communify_dir_path.join "#{file_name}.rb"
@@ -15,7 +15,7 @@ module Communify
         migration_template "sms_migration.erb", "#{communify_dir_path}/create_communify_sms.rb", migration_version: migration_version
       end
 
-      def create_sms_model
+      def copy_sms_model
         template "sms_model.erb", "app/models/communify_sms.rb"
       end
       
