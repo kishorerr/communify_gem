@@ -13,7 +13,6 @@ module Communify
                 auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
                 @current_resource = CommunifySms.find(resource_id)
-                # puts @current_resource.id
                 begin
                     @client.messages.create(from: Communify.sender_no,to: recipient_number,body: message)
                 rescue Twilio::REST::RestError => e
@@ -21,6 +20,7 @@ module Communify
                     attempt = attempt +1
                     @current_resource.update_column(:message_status, "Message Failed at #{DateTime.now} due to error => #{e}")
                     if attempt < 4
+                        sleep(time.minutes)
                         retry
                     end
                 else
