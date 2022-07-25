@@ -15,7 +15,7 @@ module Communify
                 @failed_resource.update_column(:message_status, "Message Failed at #{DateTime.now} due to error => #{e}")
             end
 
-            def perform(recipient_number, message, resource_id, time, attempt)
+            def perform(resource_id, recipient_number, message, time, attempt)
                 account_sid = Communify.account_sid
                 auth_token = Communify.auth_token
                 @client = Twilio::REST::Client.new account_sid, auth_token
