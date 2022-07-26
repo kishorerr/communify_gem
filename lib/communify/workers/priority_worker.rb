@@ -14,17 +14,17 @@ module Communify
                 @client = Twilio::REST::Client.new account_sid, auth_token
                 @current_resource = CommunifySms.find(resource_id)
                 begin
-                    twilio_response = @client.messages.create(from: Communify.sender_no,to: recipient_number,body: message)
+                    twilio_message = @client.messages.create(from: Communify.sender_no,to: recipient_number,body: message)
                 rescue Exception => e
                     @current_resource.update_column(:attempt_count, attempt)
                     attempt = attempt +1
-                    @current_resource.update_column(:message_status, "Message Failed at #{DateTime.now} due to error => #{e}")
+                    @current_resource.update_column(:message_status, "Message failed at #{DateTime.now} due to error => #{e}")
                     if attempt < 4
                         sleep(time.minutes)
                         retry
                     end
                 else
-                    @current_resource.update_column(:message_sid, twilio_response.sid)
+                    @current_resource.update_column(:message_sid, twilio_message.sid)
                     @current_resource.update_column(:attempt_count, attempt)
                     @current_resource.update_column(:message_status, "Message Delivered at #{DateTime.now}")
                 end
