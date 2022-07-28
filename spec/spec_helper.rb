@@ -1,4 +1,5 @@
 require "bundler/setup"
+require "sidekiq/testing"
 require "communify"
 
 RSpec.configure do |config|

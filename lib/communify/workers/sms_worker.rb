@@ -4,7 +4,7 @@ require 'communify'
 require 'communify/controllers/sms_controller'
 module Communify
     module Workers 
-        class PriorityWorker
+        class SmsWorker
             include Sidekiq::Worker
             sidekiq_options dead: false, retry: false
 
